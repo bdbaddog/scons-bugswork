@@ -1,0 +1,7 @@
+import os
+env=Environment(ENV=os.environ, F90='gfortran-mp-9', LINK='gfortran-mp-9')
+# Build options
+sources = ['test_1.f90', '#subdir/b_test1.f90', '#subdir/c_test1.f90', 'test_2.f90', '#subdir/a_test2.f90', 'testing.f90']
+obj=env.Object(sources)
+# Program
+env.Program("Testing",obj)

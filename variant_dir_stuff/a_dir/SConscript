@@ -1,0 +1,10 @@
+env= Environment()
+
+objs = []
+source_list = ['a.c']
+for a in source_list:
+   prefix='objs/'+a.split('.')[0]
+   objs.extend(env.SharedObject(prefix,a))
+
+env.Program('bin/myprogram',objs)
+

@@ -1,0 +1,3 @@
+env = Environment()
+env.SharedLibrary('test', ['test.cpp'], SHLIBVERSION='0.1.0')
+

@@ -1,0 +1,20 @@
+import os
+import distutils.sysconfig
+
+EnsureSConsVersion(2, 1, 0)
+
+print distutils.sysconfig.get_python_inc()
+
+includes = [distutils.sysconfig.get_python_inc(), "#include", "#other"]
+
+env = Environment(tools=["default", "swig"])
+env.Append(CPPPATH=includes)
+env.Append(SWIGPATH=includes)
+env.Append(LIBPATH=["#lib"])
+env.AppendENVPath("PATH", os.environ["PATH"])
+
+lib = env.SharedLibrary("#lib/example", Glob("#src/*.cc"))
+
+env.Append(SWIGFLAGS=["-python", "-c++"])
+obj = env.SharedObject("python/module_wrap.os", "python/module.i")
+python = env.LoadableModule("#python/_module", obj, SHLIBPREFIX="", LIBS=["example"])

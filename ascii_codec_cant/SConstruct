@@ -1,0 +1,6 @@
+import os
+env = Environment(tools = ["mingw"], ENV=os.environ)
+prog = env.Program("main", ["main.cpp"])
+run = env.Command(Value("testrun"), prog, "$SOURCE")
+env.Alias("run", run)
+AlwaysBuild(run)

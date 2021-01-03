@@ -1,0 +1,3 @@
+env=Environment(JAVAC=r'/Users/bdbaddog/tmp/a b/javac')
+
+env.Java(target = 'classes', source = ['test.java'])

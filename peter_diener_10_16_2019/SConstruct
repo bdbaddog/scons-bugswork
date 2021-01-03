@@ -1,0 +1,30 @@
+import sys
+import os
+env = DefaultEnvironment(ENV = {'PATH' : os.environ['PATH'],
+                                # 'LD_LIBRARY_PATH' : os.environ['LD_LIBRARY_PATH']
+                                },
+                         LINK = 'gfortran',
+                         LINKFLAGS = '-g',
+                         TOOLS= ['default', 'gfortran'])
+
+# pretty output
+if ARGUMENTS.get('VERBOSE') != '1':
+  if sys.stdout.isatty():
+    env['F90COMSTR'] = "\033[92mCompiling\033[0m $TARGET"
+    env['LINKCOMSTR'] = "\033[94mLinking\033[0m $TARGET"
+  else:
+    env['F90COMSTR'] = "Compiling $TARGET"
+    env['LINKCOMSTR'] = "Linking $TARGET"
+
+# Build options
+
+env['F90FILESUFFIXES']=['.f90']
+env['F90']      = 'gfortran'
+env['F90FLAGS'] = ['-O2', '-g']
+env['FORTRANMODDIR'] = '${TARGET.dir}'
+
+Export('env')
+
+SConscript('Src/SConscript', exports='env', variant_dir='Build', duplicate=0)
+
+Decider('MD5-timestamp')

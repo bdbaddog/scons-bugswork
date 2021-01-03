@@ -1,0 +1,9 @@
+Please use the script test.sh to reproduce the issue
+of corrupted .sconsign.dblite. 
+The script requires as the parameter the directory
+with scripts scons.py and sconsign.py .
+
+Used versions:
+scons 2.3.0
+git 1.7.7.1
+

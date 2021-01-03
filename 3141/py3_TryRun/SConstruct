@@ -1,0 +1,15 @@
+CacheDir('objects')
+
+env = Environment()
+
+def CompilerCheck(context):
+    context.Message("Checking for a working C compiler ")
+    ret = context.TryRun("int a;\n", '.c' )[0]
+    context.Result(ret)
+    if ret == 0:
+        return False
+
+conf = Configure(Environment(),
+                 custom_tests = {"CompilerCheck" : CompilerCheck})
+
+conf.CompilerCheck()

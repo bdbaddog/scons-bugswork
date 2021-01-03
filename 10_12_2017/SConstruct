@@ -1,0 +1,7 @@
+
+Help("""
+  DEBUG=1,0             - enable debug build, default 1
+""")
+
+import sys
+print('session python path:', str(sys.path).replace(', ', ',\n' + ' ' * 26))

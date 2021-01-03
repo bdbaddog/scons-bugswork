@@ -1,0 +1,2 @@
+env = Environment()
+env.SharedLibrary('testlib',['file1.c'], SHLIBVERSION='1.2.3')

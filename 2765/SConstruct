@@ -1,0 +1,11 @@
+def myFunction(env):
+    return "toto"
+
+env=Environment()
+env["_myfunc"] = myFunction
+env["MYFUNC"] = "${_myfunc(env)}"
+env['DUH'] = '${MYFUNC.upper()}'
+print env.subst("Normal: ${MYFUNC}")
+print env.subst("UPPER : ${MYFUNC.upper()}")
+print env.subst("UPPER : ${DUH}")
+

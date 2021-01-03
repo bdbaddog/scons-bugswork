@@ -1,0 +1,8 @@
+def foo(target, source, env, for_signature):
+   raise TypeError("you won't find this bug")
+
+# Will expand $BAR to "bar baz"
+env=Environment(FOO=foo, BAR="$FOO baz")
+
+print("Bad:%s"%env.subst('$FOO'))
+

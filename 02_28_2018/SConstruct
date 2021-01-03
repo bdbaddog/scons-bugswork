@@ -1,0 +1,10 @@
+env = Environment()
+
+def test_builder_action(target, sources, env):
+    print "In test_builder_action: target =", target, 'Sources are:', sources
+
+# Setup builder
+env.Append(BUILDERS={'TestBuilder' : env.Builder(action=test_builder_action)})
+
+test_node = env.TestBuilder(['test.target'], ['test1.source','test2.source'])
+test_node = env.TestBuilder(['test1.target'], ['test11.source','test12.source'])

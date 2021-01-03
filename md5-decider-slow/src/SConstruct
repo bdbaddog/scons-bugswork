@@ -1,0 +1,5 @@
+Repository('../repo')
+env=Environment()
+env.Decider('MD5-timestamp')
+
+env.Program('hello.c')

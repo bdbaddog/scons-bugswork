@@ -1,0 +1,4 @@
+env=Environment(tools=[])
+env.Command('c','b',Copy('$TARGET', '$SOURCE'))
+env.Requires('c','a')
+

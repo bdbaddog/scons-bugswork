@@ -1,0 +1,4 @@
+env = Environment()
+conf1 = Configure(env)
+env2 = Environment()
+conf2 = Configure(env2)

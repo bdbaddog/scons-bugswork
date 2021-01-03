@@ -1,0 +1,4 @@
+tgt = Command('tgt', 'src', 'touch $TARGET sf0 sf1')
+sf = SideEffect([ 'sf0', 'sf1' ], tgt)
+Install('dir', tgt + sf)
+--

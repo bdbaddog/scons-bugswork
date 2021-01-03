@@ -1,0 +1,8 @@
+import SCons.Node.FS
+
+env = Environment()
+
+env.VariantDir('build', 'src', duplicate=0)
+env.Program('build/bugs.cpp')
+
+#SCons.Node.FS.os_sep_is_slash = False

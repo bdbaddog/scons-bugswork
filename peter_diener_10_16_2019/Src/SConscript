@@ -1,0 +1,46 @@
+import os
+import re
+import sys
+
+Import('env')
+
+# Based on a list of source files return the possible locations of modules
+def FortranModPath ( sources ):
+    # Start with an empty modpath list
+    modpath = []
+    # Loop over the sources
+    for s in sources:
+        # Split the source into path and filename
+        path, file = os.path.split(s)
+        # Use a regex to match fortran files
+        match = re.match( r'.*(.f90|.f)$',file)
+        # If it is a fortran file add the path to the modpath list
+        if match:
+            modpath.append(path)
+
+    # Get the unique paths by converting to a set and then back to a list
+    modpath = list(set(modpath))
+    # Convert each path to the corresponding path in the Build directory
+    buildmodpath = map(lambda d: os.path.join('../Build',d), modpath)
+    # Return the list of module paths
+    return buildmodpath
+
+sources = [
+    'Test1/test_1.f90',
+    'Test1/test_1_sub.f90',
+    'Test2/test_2.f90',
+    'Test2/test_2_sub.f90',
+    'Main/test_submodules.f90'
+          ] 
+
+modpath = FortranModPath ( sources )
+print(sys.version_info)
+
+env['F90PATH'] = modpath
+env['FORTRANPATH'] = modpath
+
+executable = 'Exe/test_submodules.x'
+
+Program(executable, sources)
+
+Decider('MD5-timestamp')

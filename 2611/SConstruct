@@ -1,0 +1,6 @@
+AddOption('--dblatex', dest='use_dblatex', action="store_true", default=False,
+          help="Use dblatex to generate PDF instead of Apache FOP.")
+ 
+vars = Variables()
+env = Environment(variables = vars)
+Help(vars.GenerateHelpText(env), append=True)

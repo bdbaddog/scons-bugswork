@@ -1,0 +1,2 @@
+CacheDir("cache")
+Command("somefile", Value("test"), "echo hi > $TARGET")

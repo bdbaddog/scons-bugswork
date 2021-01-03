@@ -1,0 +1,4 @@
+env = Environment()
+testlib = env.SharedLibrary('testlib',['file1.c'], SHLIBVERSION='1.2.3')
+env.InstallVersionedLib('installdir1', testlib)
+env.InstallVersionedLib('installdir2', testlib, SHLIBVERSION='1.2.3')

@@ -1,0 +1,8 @@
+     scons_subprocess_call = (lambda target, source, env
+                                    : subprocess.call(env['ARGS'], source[0]))
+
+    data = env.Command(
+      source = "foo.pl",
+      target = "bar.log",
+      action = scons_subprocess_call,
+      ARGS   = ['homo sapiens', 'Reference GRCh'])

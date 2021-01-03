@@ -1,0 +1,10 @@
+DefaultEnvironment(tools=[])
+env = Environment()
+env.CacheDir('../cache')
+
+conf = Configure(env )
+
+conf.TryCompile('int a;', '.c')
+
+env = conf.Finish()
+

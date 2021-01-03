@@ -1,0 +1,13 @@
+env = Environment()
+env.CacheDir('../cache')
+
+def MyCheck(context):
+    context.Message('Checking if TryCompile works...')
+    rv = context.TryCompile('int a;', '.c')
+    context.Result(rv)
+    return rv
+
+conf = Configure(env, custom_tests = {'MyCheck' : MyCheck})
+conf.MyCheck()
+env = conf.Finish()
+

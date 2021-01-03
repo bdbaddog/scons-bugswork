@@ -1,0 +1,10 @@
+def CheckTwoCents(context):
+  stat, out = context.TryAction(r"printf '2\302\242\n' > $TARGET")
+  context.Result(stat)
+  return stat
+
+env = Environment()
+cfg = Configure(env)
+cfg.AddTest('CheckTwoCents', CheckTwoCents)
+cfg.CheckTwoCents()
+env = cfg.Finish()

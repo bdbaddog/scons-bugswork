@@ -1,0 +1,5 @@
+import os
+env=Environment(ENV=os.environ, F90='gfortran', LINK='gfortran', LINKFLAGS='-arch x86_64')
+# Build options
+sources = ['test_1.f90']
+obj=env.Object(sources)

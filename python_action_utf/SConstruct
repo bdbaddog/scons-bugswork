@@ -1,0 +1,28 @@
+'''
+SConstruct file to re-produce the issue
+both commands
+    scons hello.txt
+and
+    scons hello.txt WORK=1
+should create the same contents of 'hello.txt' file
+'''
+import os
+
+if ARGUMENTS.get('WORK'):
+    def build_it(target, source, env):
+        with open(target[0].abspath, "w") as w:
+            os.write(w.fileno(), '\xef\xbb\xbf')        
+            w.write("Hello world")
+else:
+    def build_it(target, source, env):
+        with open(target[0].abspath, "w") as w:
+            os.write(w.fileno(), '\xef\xbb\xbf')        
+            w.write(u"Hello world")
+Builder(
+    action=Action(
+        build_it
+    )
+)(Environment(), 'hello.txt', '')
+
+# vim: set et ts=4 sw=4 ai ft=python :
+

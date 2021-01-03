@@ -1,0 +1,91 @@
+scons: Reading SConscript files ...
+sys.version_info(major=2, minor=7, micro=12, releaselevel='final', serial=0)
+scons: done reading SConscript files.
+scons: Building targets ...
+Compiling Build/Test1/test_1.o
+f951: Warning: Nonexistent include directory 'Build/Test2' [-Wmissing-include-dirs]
+f951: Warning: Nonexistent include directory 'Build/Main' [-Wmissing-include-dirs]
+Compiling Build/Test1/test_1_sub.o
+f951: Warning: Nonexistent include directory 'Build/Test2' [-Wmissing-include-dirs]
+f951: Warning: Nonexistent include directory 'Build/Main' [-Wmissing-include-dirs]
+Compiling Build/Test2/test_2.o
+f951: Warning: Nonexistent include directory 'Build/Main' [-Wmissing-include-dirs]
+Compiling Build/Test2/test_2_sub.o
+f951: Warning: Nonexistent include directory 'Build/Main' [-Wmissing-include-dirs]
+Compiling Build/Main/test_submodules.o
+Linking Build/Exe/test_submodules.x
++-.
+  +-Build
+  | +-Build/Exe
+  | | +-Build/Exe/test_submodules.x
+  | |   +-Build/Test1/test_1.o
+  | |   | +-Src/Test1/test_1.f90
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-Build/Test1/test_1_sub.o
+  | |   | +-Src/Test1/test_1_sub.f90
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-Build/Test2/test_2.o
+  | |   | +-Src/Test2/test_2.f90
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-Build/Test2/test_2_sub.o
+  | |   | +-Src/Test2/test_2_sub.f90
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-Build/Main/test_submodules.o
+  | |   | +-Src/Main/test_submodules.f90
+  | |   | +-Build/Test1/test_1.mod
+  | |   | | +-Src/Test1/test_1.f90
+  | |   | | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   | +-Build/Test2/test_2.mod
+  | |   | | +-Src/Test2/test_2.f90
+  | |   | | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-/home/diener/GCC-7.3.0/bin/gfortran
+  | +-Build/Main
+  | | +-Src/Main/test_submodules.f90
+  | | +-Build/Main/test_submodules.o
+  | |   +-Src/Main/test_submodules.f90
+  | |   +-Build/Test1/test_1.mod
+  | |   | +-Src/Test1/test_1.f90
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-Build/Test2/test_2.mod
+  | |   | +-Src/Test2/test_2.f90
+  | |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | |   +-/home/diener/GCC-7.3.0/bin/gfortran
+  | +-Src/SConscript
+  | +-Build/Test1
+  | | +-Src/Test1/test_1.f90
+  | | +-Build/Test1/test_1.mod
+  | | | +-Src/Test1/test_1.f90
+  | | | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | | +-Build/Test1/test_1.o
+  | | | +-Src/Test1/test_1.f90
+  | | | +-/home/diener/GCC-7.3.0/bin/gfortran
+  | | +-Src/Test1/test_1_sub.f90
+  | | +-Build/Test1/test_1_sub.o
+  | |   +-Src/Test1/test_1_sub.f90
+  | |   +-/home/diener/GCC-7.3.0/bin/gfortran
+  | +-Build/Test2
+  |   +-Src/Test2/test_2.f90
+  |   +-Build/Test2/test_2.mod
+  |   | +-Src/Test2/test_2.f90
+  |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  |   +-Build/Test2/test_2.o
+  |   | +-Src/Test2/test_2.f90
+  |   | +-/home/diener/GCC-7.3.0/bin/gfortran
+  |   +-Src/Test2/test_2_sub.f90
+  |   +-Build/Test2/test_2_sub.o
+  |     +-Src/Test2/test_2_sub.f90
+  |     +-/home/diener/GCC-7.3.0/bin/gfortran
+  +-SConstruct
+  +-Src
+    +-Src/Exe
+    +-Src/Main
+    | +-Src/Main/test_submodules.f90
+    +-Src/SConscript
+    +-Src/Test1
+    | +-Src/Test1/test_1.f90
+    | +-Src/Test1/test_1_sub.f90
+    +-Src/Test2
+      +-Src/Test2/test_2.f90
+      +-Src/Test2/test_2_sub.f90
+scons: done building targets.

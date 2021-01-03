@@ -1,0 +1,6 @@
+env = Environment()
+env.AppendUnique(CPPPATH = ['.'], LIBPATH = ['.'])
+env.Program('main.cpp', LIBS = ['foo'])
+env.SharedLibrary('foo', 'foo.cpp', SHLIBVERSION = '0.1.2')
+
+#env.SharedLibrary('foo', 'foo.cpp') # this seems to work as expected

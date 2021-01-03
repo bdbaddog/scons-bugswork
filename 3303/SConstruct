@@ -1,0 +1,35 @@
+AddOption('--show_bug', action='store_true', dest='show_bug', default=False,
+          help="Show the config=force bug")
+
+env=Environment()
+print("Before Conf decide_source:%s"%env.decide_source)
+
+conf = Configure(env, config_h='config.h')
+if not conf.CheckCXXHeader('stdio.h'):
+    print 'vector.h must be installed!'
+    conf.Define('NO_STDIO_H')
+
+# Don't need this to cause the issue
+# env = conf.Finish()
+
+print("After Conf decide_source:%s"%env.decide_source)
+
+
+if not GetOption('show_bug'):
+    print("Should work properly")
+    env=Environment()
+else:
+    print("================================================================================================")
+    print("Should rebuild when not needed because Configure with --config=force ")
+    print("polutes the referenced environment's decider with a decider to force all config steps to rebuild")
+    print("When run with --debug=explain will show all sources/implicits as changed")
+    print("================================================================================================")
+
+
+print("Before Object decide_source:%s"%env.decide_source)
+env.Object("myfile.c", CPPPATH=["."])
+
+env2=conf.Finish()
+print("Finish Return decide_source:%s"%env2.decide_source)
+
+

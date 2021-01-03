@@ -1,0 +1,14 @@
+import SCons.Action
+
+SCons.Action.print_actions = False
+
+
+env = Environment()
+
+silent = ARGUMENTS.get('QUIET',0)
+
+# print("QUIET:%s"%silent)
+if silent:
+    env.SetOption('silent',True)
+
+env.Command('new','old',[Copy('$TARGET','$SOURCE'),Chmod('$TARGET', 0755)])

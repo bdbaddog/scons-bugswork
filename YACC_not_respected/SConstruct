@@ -1,0 +1,5 @@
+env=Environment(tools=[])
+env2=env.Clone(YACC="SOMETHING_DUMB")
+env2.Tool('yacc')
+# print("env2 YACC:%s"%env2['YACC'])
+env2.CFile('dumb.y')

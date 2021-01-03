@@ -1,0 +1,5 @@
+env = Environment()
+conf = Configure(env)
+clone = env.Clone()
+clone_conf = Configure(clone)
+

@@ -1,0 +1,39 @@
+env=Environment()
+
+binName='my_favorite'
+### Fichiers a compiler ###
+srcFiles = [ 
+    'a.c',
+    'b.c',
+]
+
+### Dossiers a inclure (headers) ###
+includeFolders = [ 
+    'git-submodule',
+]
+
+### Flags de compilation ###
+compilationFlags = ''# '-some -compilation -flags'
+
+### Librairies externes ##
+libs = [
+    'm',
+]
+
+VariantDir('bin','git-submodule',duplicate=0)
+
+alt_src = ["#bin/"+f for f in srcFiles]
+
+### Regle de generation sc.bin  ###
+sc_multi = env.Program(
+    "#bin/"+binName,
+    alt_src,
+    CDEFINES = {'SOME_MACRO':'SOME_VALUE'},
+    CPPPATH = includeFolders,
+    CFLAGS = compilationFlags,
+    LIBS = libs,
+)
+
+# Par default, on genere la cible sc_multi
+Default(sc_multi)
+Alias('sc_multi', sc_multi)
