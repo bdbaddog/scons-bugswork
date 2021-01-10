@@ -1,0 +1,4 @@
+env = Environment()
+env.Replace( CPPDEFINES = "${DEFS}",
+             DEFS = ["foo1", "foo2"] )
+objects = env.Program("test", env.Glob("main.cpp"))
