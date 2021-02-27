@@ -1,3 +1,6 @@
+import functools
+
+
 class foo:
     def __init__(self, arg):
         self.arg = arg
@@ -5,11 +8,24 @@ class foo:
     def __call__(self, target, source, env, for_signature):
         return self.arg + " bar"
 
+
 # Will expand $BAR to "my argument bar baz"
-env=Environment(FOO=foo, BAR="${FOO('my argument')} baz")
+env = Environment(FOO=foo, BAR="${FOO('my argument')} baz")
 
 other_foo = foo(' Bananas')
 env['BANANAS'] = other_foo
 
-print("->%s"%env.subst("$BAR"))
-print("->%s"%env.subst("$BANANAS"))
+print("$BAR    ->%s" % env.subst("$BAR"))
+print("$BANANAS->%s" % env.subst("$BANANAS"))
+
+
+def afunc(target, source, env, for_signature, other_flag='one'):
+    return "Fun %s" % other_flag
+
+
+env['AFUNC'] = afunc
+print("afunc   ->%s" % env.subst("$AFUNC"))
+
+bfunc = functools.partial(afunc, other_flag='two')
+env['BFUNC'] = bfunc
+print("bfunc   ->%s" % env.subst("$BFUNC"))
