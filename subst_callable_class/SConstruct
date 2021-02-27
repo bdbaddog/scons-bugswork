@@ -29,3 +29,10 @@ print("afunc   ->%s" % env.subst("$AFUNC"))
 bfunc = functools.partial(afunc, other_flag='two')
 env['BFUNC'] = bfunc
 print("bfunc   ->%s" % env.subst("$BFUNC"))
+
+def cs(target=None, source=None, env=None, for_signature=None):
+    return 'cs'
+
+env['CS'] = cs
+
+print("CS     ->%s"%env.subst("$CS"))
