@@ -1,0 +1,9 @@
+env = Environment()
+
+env['CPPPATH'] = ['src', 'include']
+
+# env.Command("outfile.txt", "infile.txt", 
+#             ["cp $SOURCE $TARGET", "echo \"$CPPPATH\" >> $TARGET"], 
+#             CPPPATH=["$CPPPATH","xyz"])
+
+env.Program("hello.c", CPPPATH=["$CPPPATH","xyz"])
