@@ -1,4 +1,5 @@
 import functools
+import timeit
 
 
 class foo:
@@ -36,3 +37,12 @@ def cs(target=None, source=None, env=None, for_signature=None):
 env['CS'] = cs
 
 print("CS     ->%s"%env.subst("$CS"))
+
+def run_it():
+    env.subst("$CS")
+    env.subst("$BFUNC")
+    env.subst("$AFUNC")
+    env.subst("$BANANAS")
+    env.subst("$BAR")
+
+print(timeit.timeit('run_it()',globals=globals()))
