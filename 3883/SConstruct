@@ -1,0 +1,12 @@
+env = Environment()
+env.SharedLibrary(
+    target = 'libdummy.so.7',
+    source = env.Textfile(
+        target = 'dummy.c',
+        source = ['void foo(void) { }'],
+    ),
+    LINKFLAGS = [
+        '-Wl,-soname=$_SHLIBSONAME',
+    ],
+    SHLIBSUFFIX='',
+)
