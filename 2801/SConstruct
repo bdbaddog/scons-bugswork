@@ -1,0 +1,3 @@
+env = Environment()
+p = env.Program("main.c")
+env.Clean(p, "${DUMMY}")
