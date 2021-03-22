@@ -1,0 +1,4 @@
+env = Environment()
+o = env.Program('Hello.cc')
+env.Default('all')
+env.Alias('all', o)
