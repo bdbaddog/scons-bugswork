@@ -1,0 +1,12 @@
+vars = Variables()
+vars.Add(BoolVariable('array', help='specify CXXFLAGS as array', default=False))
+
+env = Environment(variables=vars)
+
+if not env['array']:
+    env['CXXFLAGS'] += '-O3 -W -Wall -Wundef  -Wcast-align -Wno-unused-parameter -Wshadow -Wredundant-decls'
+else:
+    env['CXXFLAGS'] += ['-O3', '-W', '-Wall', '-Wundef',  '-Wcast-align',
+                        '-Wno-unused-parameter', '-Wshadow', '-Wredundant-decls']
+
+env.Program('blah', 'test2399.cxx')
