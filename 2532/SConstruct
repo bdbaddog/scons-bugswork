@@ -1,0 +1,10 @@
+import os.path
+ 
+# env = Environment(tools=["mingw"]) # or without tools
+env = Environment(tools=[]) # or without tools
+
+env["BINPATH"] = "foo"
+env["PROGNAME"] = "bar"
+ 
+env.Program(os.path.join("#$BINPATH", "$PROGNAME"), ["spam.cpp"])
+
