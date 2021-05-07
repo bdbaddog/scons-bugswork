@@ -1,0 +1,45 @@
+import atexit
+
+calls = 0
+signature_calls = 0
+
+def some_generator(target, source, env, for_signature):
+    global calls, signature_calls
+    calls += 1
+    if for_signature:
+        signature_calls += 1
+    return "magic"
+
+
+env = Environment()
+
+env['GEN'] = some_generator
+gen1 = env.Command(
+    target="#genny1",
+    source=[],
+    action="echo $GEN",
+)
+env.Pseudo(gen1)
+env.Alias('good', gen1)
+
+env['GENLIST'] = ['$GEN']
+env['GENPREFIX'] = 'PRE'
+env['GENSUFFIX'] = 'SUF'
+env['CONCAT_GEN'] = '$( ${_concat(GENPREFIX, GENLIST, GENSUFFIX, __env__, lambda x: x, TARGET, SOURCE)} $) '
+
+gen2 = env.Command(
+    target="#genny2",
+    source=[],
+    action="echo $CONCAT_GEN",
+)
+env.Pseudo(gen2)
+env.Alias('bad', gen2)
+
+env.Default(None)
+
+def print_counts():
+    global calls, signature_calls
+    print('some_generator was called', calls)
+    print('some_generaator was called for sig', signature_calls)
+
+atexit.register(print_counts)

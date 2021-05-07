@@ -1,0 +1,12 @@
+env = Environment()
+
+def define_generator(target, source, env, for_signature):
+    print('XXX', [str(t) for t in target], [str(s) for s in source])
+    return "DEFINE"
+env['DEFINE_GENERATOR'] = define_generator
+
+env.Program(
+    target='main',
+    source='main.c',
+    CPPDEFINES='$DEFINE_GENERATOR'
+)
