@@ -1,0 +1,25 @@
+$ scons --version
+SCons by Steven Knight et al.:
+	SCons: v4.1.0.post1.dc58c175da659d6c0bb3e049ba56fb42e77546cd, 2021-01-20 04:32:28, by bdbaddog on ProDog2020
+	SCons path: ['/home/augfab/.local/lib/python3.6/site-packages/SCons']
+Copyright (c) 2001 - 2021 The SCons Foundation
+
+$ uname -a
+Linux *** 4.15.0-143-generic #147-Ubuntu SMP Wed Apr 14 16:10:11 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.5 LTS
+Release:	18.04
+Codename:	bionic
+
+$ scons
+scons: Reading SConscript files ...
+scons: done reading SConscript files.
+scons: Building targets ...
+g++ -o bar.os -c -fPIC bar.cc
+gcc -o foo.os -c -fPIC foo.c
+g++ -o libbar.so  -shared   bar.os $(  $) 
+gcc -o libfoo.so  -shared   foo.os $(  $) 
+scons: done building targets.
