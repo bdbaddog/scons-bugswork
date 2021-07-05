@@ -1,0 +1,11 @@
+env=Environment()
+
+prog=env.Program('main.c')
+Default(prog)
+
+installed_prog = env.Install('install_dir', prog)
+Alias('install', installed_prog)
+NoClean(installed_prog)
+
+Alias('uninstall', action=Delete(installed_prog))
+AlwaysBuild('uninstall')
