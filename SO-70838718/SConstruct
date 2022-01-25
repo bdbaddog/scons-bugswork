@@ -1,0 +1,20 @@
+env = DefaultEnvironment()
+
+deciderEnv = env.Clone()
+def source_and_target_decider(dependency, target, prev_ni, repo_node=None):
+    src_old_csig = prev_ni.csig if hasattr(prev_ni, 'csig') else None
+    src_new_csig = dependency.get_csig()
+    tgt_stored_info = target.get_stored_info()
+    tgt_old_csig = tgt_stored_info.ninfo.csig if hasattr(tgt_stored_info.ninfo, 'csig') else None
+    tgt_new_csig = target.get_csig()
+    return src_new_csig != src_old_csig or tgt_new_csig != tgt_old_csig
+deciderEnv.Decider(source_and_target_decider)
+
+deciderEnv['YACCFLAGS'] = ['-d']
+deciderEnv['YACCHXXFILESUFFIX'] = '.hh'
+bison_source = deciderEnv.CXXFile('src/test.yy.cc', 'src/test.yy')[0]
+
+deciderEnv['LEXFLAGS'] = [f'--header-file=${SOURCE}.hh']
+flex_source = deciderEnv.CXXFile('src/test.ll.cc', 'src/test.ll')[0]
+
+Program('test', [bison_source, flex_source])

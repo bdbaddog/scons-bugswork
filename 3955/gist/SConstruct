@@ -1,2 +1,10 @@
 SharedLibrary("foo.c")
 SharedLibrary("bar.cc")
+Program("baz.cc", LIBS=["bar"], LIBPATH=["."])
+
+# with open("env_vars.txt","w") as ev:
+#     ev.write(Dump())
+
+
+env=Environment()
+print("TEST:%s"%env.subst("$( $)", raw=2))
