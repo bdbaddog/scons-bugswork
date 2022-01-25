@@ -10,11 +10,12 @@ def source_and_target_decider(dependency, target, prev_ni, repo_node=None):
     return src_new_csig != src_old_csig or tgt_new_csig != tgt_old_csig
 deciderEnv.Decider(source_and_target_decider)
 
+deciderEnv['YACC'] = '/opt/local/bin/bison'
 deciderEnv['YACCFLAGS'] = ['-d']
 deciderEnv['YACCHXXFILESUFFIX'] = '.hh'
 bison_source = deciderEnv.CXXFile('src/test.yy.cc', 'src/test.yy')[0]
 
-deciderEnv['LEXFLAGS'] = [f'--header-file=${{SOURCE}}.hh']
-flex_source = deciderEnv.CXXFile('src/test.ll.cc', 'src/test.ll')[0]
+# deciderEnv['LEXFLAGS'] = [f'--header-file=${{SOURCE}}.hh']
+flex_source = deciderEnv.CXXFile('src/test.ll.cc', 'src/test.ll',LEXFLAGS='--header-file=${SOURCE}.hh',CPPPATH=['.'])[0]
 
-Program('test', [bison_source, flex_source])
+env.Program('test', [bison_source, flex_source], LIBS=['l'])
