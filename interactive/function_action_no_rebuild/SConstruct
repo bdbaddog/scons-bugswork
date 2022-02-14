@@ -1,0 +1,15 @@
+DefaultEnvironment(tools=[])
+env=Environment(tools=[])
+
+def create(target, source, env):
+    # A function that will write a 'prefix=$SOURCE'
+    # string into the file name specified as the
+    # $TARGET.
+    with open(str(target[0]), 'w') as f:
+        f.write('prefix=' + source[0].get_text_contents())
+
+
+env['BUILDERS']['Config'] = Builder(action = create)
+
+env.Config('outfile.txt', 'infile.txt')
+env.Config('other_outfile.txt', 'infile.txt')
