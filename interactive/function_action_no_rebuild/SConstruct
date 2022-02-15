@@ -13,3 +13,7 @@ env['BUILDERS']['Config'] = Builder(action = create)
 
 env.Config('outfile.txt', 'infile.txt')
 env.Config('other_outfile.txt', 'infile.txt')
+env.Config('another_outfile.txt', 'infile.txt')
+
+env.Command('dummy.txt', 'infile.txt', "cp $SOURCE $TARGET")
+# env.Config('value_based.txt',Value('just one thing'))
