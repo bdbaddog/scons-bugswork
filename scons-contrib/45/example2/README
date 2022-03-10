@@ -1,0 +1,6 @@
+To build, create links to your site_scons, gcc and Qt4 installation.  Example:
+
+ln -s ~/site_scons .
+ln -s /usr/local/pkgs/gcc-10.3.0 gcc_link
+ln -s /usr/local/pkgs/qt-4.8.7 qt4_link
+scons

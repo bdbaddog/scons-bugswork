@@ -1,0 +1,35 @@
+# -*- Python -*-
+
+import os
+
+def main():
+    env_qt = Environment()
+
+    gcc_root = 'gcc_link'
+    gcc_bin = os.path.join(gcc_root, 'bin')
+    gcc_include = os.path.join(gcc_root, 'include')
+    gcc_lib = os.path.join(gcc_root, 'lib')
+    gcc_lib64 = os.path.join(gcc_root, 'lib64')
+
+    qt_root = 'qt4_link'
+    qt_bin = os.path.join(qt_root, 'bin')
+    qt_include = os.path.join(qt_root, 'include')
+    qt_lib = os.path.join(qt_root, 'lib')
+
+    lib_path = [qt_lib, gcc_lib64, gcc_lib]
+
+    env_qt['ENV']['PATH'] = ':'.join([qt_bin, gcc_bin, env_qt['ENV']['PATH']])
+    env_qt['ENV']['LD_LIBRARY_PATH'] = ':'.join(lib_path)
+    env_qt.Prepend(LIBPATH = lib_path)
+    env_qt.Append(CCFLAGS = ['-I'+qt_include, '-I'+gcc_include])
+
+    env_qt.SetDefault(QT4DIR = qt_root)
+    env_qt['ENV']['PKG_CONFIG_PATH'] = env_qt.subst('$QT4DIR/lib/pkgconfig')
+    env_qt.AppendUnique(CPPDEFINES = 'QT_NO_KEYWORDS')
+    env_qt.Tool('default')
+    env_qt.Tool('qt4')
+    env_qt.AppendUnique(LIBS = ['QtGui', 'QtCore'])
+
+    SConscript('./SConscript', exports='env_qt')
+
+main()

@@ -1,0 +1,9 @@
+# -*- Python -*-
+
+Import('env_qt')
+env_qt = env_qt.Clone()
+
+objs = env_qt.SharedObject('hello.cpp')
+programs = env_qt.Program('hello', objs)
+
+Default(programs)
