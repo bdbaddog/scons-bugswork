@@ -1,0 +1,13 @@
+DefaultEnvironment(tools=[])
+env = Environment(tools=['textfile'])
+
+def make_foo_path():
+    return 'foo'
+
+env.Substfile(
+    target='foo',
+    source='foo.in',
+    SUBST_DICT={
+        '@foo_path@' : make_foo_path,
+    }
+)
