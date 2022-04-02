@@ -1,0 +1,2 @@
+env=Environment(XYZ=2)
+env.Textfile('outfile.txt', source=['int xyz=$XYZ;\n'], varlist=['XYZ'])
