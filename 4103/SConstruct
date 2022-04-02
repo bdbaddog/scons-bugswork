@@ -1,0 +1,21 @@
+DefaultEnvironment(tools=[])
+env = Environment(tools=[])
+
+
+s = env.File("source.txt")
+
+all_items = Glob("#/*_Ts.py")
+all_sconscripts = Glob("#/*/SConscript")
+objs = []
+
+for s in all_sconscripts:
+    print("Processing   :%s"%s)
+    objs += SConscript(str(s))
+
+
+for ts in all_items:
+    env.Command(
+        "outdir/%s_target.txt" % ts,
+        s,
+        "cd ${SOURCE.srcpath.dir.abspath} && python $SOURCE --output=$TARGET",
+    )
