@@ -1,0 +1,48 @@
+env = Environment(tools = ['default','yacc','lex','swig'])#, YACC='/usr/bin/bison')
+
+yacc_test_text = """
+%{
+#include <stdio.h>
+
+/* MSVC++ needs this before it can swallow Bison output */
+#ifdef _MSC_VER
+# define __STDC__
+#endif
+%}
+%token MSG
+%start ROOT
+%%
+ROOT:
+    MSG { printf("HELLO"); } 
+    ;
+%%
+"""
+
+def CheckYacc(context):
+    context.Message("Checking for Yacc ('%s')... " % context.env.get('YACC'))
+    is_ok = context.TryCompile(yacc_test_text,".y")
+    context.Result(is_ok)
+    return is_ok
+    
+conf = Configure(env, custom_tests = {'CheckYacc' : CheckYacc})
+
+
+
+conf.env['HAVE_YACC'] = True
+if not conf.CheckYacc():
+    conf.env['HAVE_YACC'] = False
+
+
+
+conf.Finish()
+
+if env['HAVE_YACC']:
+    print("yacc is ok")
+else:
+    print("yacc is broken")
+
+
+# with open('x.y','w') as o:
+#     o.write(yacc_test_text)
+
+# env.SharedObject('x.y')
