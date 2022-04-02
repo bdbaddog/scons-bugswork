@@ -1,0 +1,19 @@
+def print_target_1(target, source, env): 
+   print("Target 1 built") 
+ 
+def print_alias_1(target, source, env): 
+   print("[I'm not getting called]") 
+ 
+def print_alias_2(target, source, env): 
+   print("I'm getting called because of AlwaysBuild() workaround") 
+ 
+t1 = Command("t1", 'a.txt', Action(print_target_1, cmdstr=None)) 
+Default(t1) 
+ 
+v = Value("_") 
+a1 = Alias("a1", v, Action(print_alias_1, cmdstr=None)) 
+a2 = Alias("a2", v, Action(print_alias_2, cmdstr=None)) 
+Depends(t1, a1) 
+Depends(t1, a2) 
+ 
+# AlwaysBuild(a2)
