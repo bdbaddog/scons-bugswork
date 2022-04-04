@@ -1,7 +1,6 @@
-#include <iostream.h>
 
-main()
+int main()
 {
-    cout << "Hello World!";
+    const char*xy="Hello World!";
     return 0;
 }

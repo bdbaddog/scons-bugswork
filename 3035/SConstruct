@@ -1,3 +1,12 @@
 env = Environment(tools=['mingw'])
-lib = env.SharedLibrary('foo', ['foo.cpp'], SHLIBVERSION='2.4')
+lib = env.SharedLibrary('foo', ['test.cpp'], SHLIBVERSION='2.4')
 env.AlwaysBuild(lib)
+
+
+print(env.Dump())
+print("_SHLIBSONAME           :%s"%env.subst('$_SHLIBSONAME',target=File('foo.dll')))
+print("SHLIB_SONAME_SYMLINK   :%s"%env.subst('$SHLIB_SONAME_SYMLINK',target=File('foo.dll')))
+print("SHLIB_NOVERSION_SYMLINK:%s"%env.subst('$SHLIB_NOVERSION_SYMLINK',target=File('foo.dll')))
+
+print("SHLIB_SONAME_SYMLINK   :%s"%env['SHLIB_SONAME_SYMLINK'])
+print("SHLIB_NOVERSION_SYMLINK:%s"%env['SHLIB_NOVERSION_SYMLINK'])
