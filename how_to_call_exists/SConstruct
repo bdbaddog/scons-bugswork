@@ -1,0 +1,12 @@
+# import SCons.Tool.msvc
+# import SCons
+env = Environment()
+# print(SCons.Tool.msvc.exists(env))
+
+# print(SCons.Tool.lex.exists(env))
+
+
+import pdb; pdb.set_trace()
+
+x=Tool('msvc').exists(env)
+print("x:%s"%x)
