@@ -1,9 +1,13 @@
-e = DefaultEnvironment()
+e = DefaultEnvironment(
+    # IMPLICIT_COMMAND_DEPENDENCIES=True
+    )
  
-mycc = e.Command(target="mycc",
-                 source="/usr/bin/gcc",
-                 action="cp $SOURCE $TARGET")
+# e.AppendENVPath('PATH','./tools')
+mycc = e.Command(target="tools/mycc_1.sh",
+                 source="mycc.sh",
+                 action="mkdir -p ${TARGET.dir}; cp $SOURCE $TARGET")
  
 e.Replace(CC = mycc[0].abspath)
+# e['CC']
  
 e.Program(target='testapp', source='test.c')
