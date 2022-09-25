@@ -1,2 +1,8 @@
-#include <iostream.h>
-void main(void){ cout << "hello world" << endl; }
+#include <iostream>
+
+int main(void)
+{
+    std::cout << "hello world" << std::endl;
+    return 0;
+    
+}

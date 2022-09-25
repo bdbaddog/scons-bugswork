@@ -1,2 +1,2 @@
-BuildDir('Bin', 'src', duplicate = 1)
-Program('#Bin/hello', "#bin/hello.cpp")
+VariantDir('Bin', 'src', duplicate = 1)
+Program('#Bin/hello', "#Bin/hello.cpp")
