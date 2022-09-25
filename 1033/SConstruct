@@ -1,0 +1,2 @@
+BuildDir('Bin', 'src', duplicate = 1)
+Program('#Bin/hello', "#bin/hello.cpp")
