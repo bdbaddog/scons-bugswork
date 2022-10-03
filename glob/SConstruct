@@ -1,0 +1,19 @@
+import os.path
+
+env=Environment()
+
+def SConscript_files(env):
+    sconscripts=Glob("*/*/SConscript", strings=True)
+    return sconscripts
+
+objs = []
+env['MODULES']=[]
+x=SConscript_files(env)
+for f in x:
+    print("File:%s"%f)
+    sconscript_dir=os.path.dirname(f)
+    SConscript(f, variant_dir=os.path.join("#/build",sconscript_dir), duplicate=False, src_dir=sconscript_dir, exports='env')
+
+
+print("MODULES:%s"%[str(o) for o in env['MODULES']])
+
