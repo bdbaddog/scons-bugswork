@@ -1,3 +1,7 @@
+"""
+For:
+https://stackoverflow.com/questions/73932572/scons-build-object-files-in-source-folders-rather-have-them-in-build-folder/73938816#73938816
+"""
 import os.path
 
 env=Environment()
