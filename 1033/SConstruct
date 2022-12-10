@@ -1,2 +1,2 @@
-VariantDir('Bin', 'src', duplicate = 1)
+VariantDir('Bin', 'src', duplicate = False)
 Program('#Bin/hello', "#Bin/hello.cpp")
