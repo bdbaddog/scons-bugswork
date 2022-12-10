@@ -1,0 +1,5 @@
+env =Environment()
+if env['ENV'].get('SOURCE_DATE_EPOCH',False):
+    print("SOURCE_DATE_EPOCH: %s"%env['ENV']['SOURCE_DATE_EPOCH'])
+else:
+    print("No SOURCE_DATE_EPOCH")

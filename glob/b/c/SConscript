@@ -1,0 +1,9 @@
+
+Import('env')
+print("In b/c/SConscript")
+files = ['x.c', 'y.c']
+
+for f in files:
+    env['MODULES'] += env.StaticObject(f)
+
+print("MODULES:%s"%[str(o) for o in env['MODULES']])

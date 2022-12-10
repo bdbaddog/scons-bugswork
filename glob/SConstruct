@@ -1,0 +1,23 @@
+"""
+For:
+https://stackoverflow.com/questions/73932572/scons-build-object-files-in-source-folders-rather-have-them-in-build-folder/73938816#73938816
+"""
+import os.path
+
+env=Environment()
+
+def SConscript_files(env):
+    sconscripts=Glob("*/*/SConscript", strings=True)
+    return sconscripts
+
+objs = []
+env['MODULES']=[]
+x=SConscript_files(env)
+for f in x:
+    print("File:%s"%f)
+    sconscript_dir=os.path.dirname(f)
+    SConscript(f, variant_dir=os.path.join("#/build",sconscript_dir), duplicate=False, src_dir=sconscript_dir, exports='env')
+
+
+print("MODULES:%s"%[str(o) for o in env['MODULES']])
+

@@ -1,0 +1,9 @@
+env = Environment()
+env['MAXLINELENGTH'] = 10
+# env["LINKCOM"] = "${TEMPFILE('$LINK -o $TARGET $SOURCES','$LINKCOMSTR')}"
+env['SHCCCOM'] = "${TEMPFILE('$SHCC -o $TARGET -c $SHCFLAGS $SHCCFLAGS $_CCCOMCOM $SOURCES','$SHCCCOMSTR')}"
+
+env.Tool('compilation_db')
+env.SharedObject("long_source_main.c")
+env.CompilationDatabase()
+print("TEMPFILE:%s"%env['TEMPFILE'])
