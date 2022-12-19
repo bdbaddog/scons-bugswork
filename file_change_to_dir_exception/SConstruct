@@ -1,0 +1,7 @@
+DefaultEnvironment(tools=[])
+env=Environment()
+
+if ARGUMENTS.get('dir', 0):
+    env.Program('dir1/main/main','main.c')
+else:
+    env.Program('dir1/main','main.c')
