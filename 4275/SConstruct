@@ -1,3 +1,7 @@
+
+
+
+
 env = Environment()
 env['MAXLINELENGTH'] = 10
 # env["LINKCOM"] = "${TEMPFILE('$LINK -o $TARGET $SOURCES','$LINKCOMSTR')}"
