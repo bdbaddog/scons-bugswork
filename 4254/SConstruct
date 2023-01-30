@@ -1,0 +1,30 @@
+# Case 0 - Always works
+case_0 = Environment(CPPDEFINES=[('z','case2')])
+case_0.Object('main_case0', 'main.c')
+
+# Case 1
+case_1 = Environment(CPPDEFINES=('z','case1'))
+# Fails in all scons'
+case_1.Object('main_case1', 'main.c')
+
+# Case 2
+case_2 = Environment(CPPDEFINES=('z','case2'))
+case_2.Append(CPPDEFINES=['a','b'])
+case_2.Object('main_case2', 'main.c')
+
+# Case 3 - fails in master
+if 'FIXED' in ARGUMENTS:
+    case_3 = Environment(CPPDEFINES=('z','case3'))
+    case_3.Append(CPPDEFINES='simple_string')
+    case_3.Object('main_case3', 'main.c')
+
+# Case 4
+case_4 = Environment(CPPDEFINES=['case4'])
+case_4.Append(CPPDEFINES=('z','case4'))
+case_4.Object('main_case4', 'main.c')
+
+# Case 5
+case_5 = Environment(CPPDEFINES=('z','case5'))
+case_5.AppendUnique(CPPDEFINES=['case5'])
+case_5.Object('main_case5', 'main.c')
+
