@@ -1,0 +1,5 @@
+import sys
+DefaultEnvironment(tools=[])
+
+sys.path.append('.')
+env=Environment(tools=['example_tool'], toolpath=['.'])
