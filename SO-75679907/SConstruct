@@ -1,0 +1,6 @@
+lof = [File(f) for f in ['/home/user/a.c','/home/user/b.c']]
+
+for f in lof:
+    print(f'f:{f}')
+
+    print(Object('other_dir/${SOURCE.filebase}$OBJSUFFIX',f))

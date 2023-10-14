@@ -1,6 +1,9 @@
 DefaultEnvironment(tools=[])
 env=Environment()
 
+# SetOption('diskcheck', 'none')
+
+
 if ARGUMENTS.get('dir', 0):
     env.Program('dir1/main/main','main.c')
 else:

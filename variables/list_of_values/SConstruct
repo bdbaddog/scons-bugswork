@@ -1,0 +1,5 @@
+print("ARGUMENTS:%s"%ARGUMENTS)
+vars = Variables(None, ARGUMENTS)
+vars.Add('RELEASE', help='Set to 1 to build for release', default=0)
+env = Environment(variables=vars)
+Help(vars.GenerateHelpText(env))
