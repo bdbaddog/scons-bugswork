@@ -1,0 +1,11 @@
+DefaultEnvironment(tools=[])
+env=Environment(tools=[])
+
+env['DINTFDIR'] = "."
+env['DIFILESUFFIX'] = '.di'
+env['DINTFDIRPREFIX'] = '-Hd='
+env['DINTFDIRSUFFIX'] = ''
+
+env['_DINTFDIR_EXPANDED'] = '${DINTFDIRPREFIX}${DINTFDIR}${DINTFDIRSUFFIX}'
+env['_DINTFDIR']='${DINTFDIR and _DINTFDIR_EXPANDED}'
+print("HERE:%s"%env.subst('$_DINTFDIR'))

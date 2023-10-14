@@ -1,0 +1,15 @@
+import sys
+
+env = Environment()
+
+env['FOO_PATH'] = r'Z:\\mongo\\build\\install\\bin\\xxsx'
+
+foo = env.Substfile(
+    target="foo",
+    source="foo.in",
+    SUBST_DICT={
+        "@foo_path@" : "$FOO_PATH",
+    },
+)
+
+env.Textfile(target='xyz.txt',source=["$FOO_PATH\n"])
