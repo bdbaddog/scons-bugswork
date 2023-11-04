@@ -19,7 +19,7 @@ else:
 srclst = map(lambda x: builddir + '/static/' + x, glob.glob('*.cpp'))
 
 #specify the build directory
-staticlibenv.BuildDir(builddir+"/static", ".", duplicate=0)
+staticlibenv.VariantDir(builddir+"/static", ".", duplicate=0)
 
 staticlibenv2 = staticlibenv.Clone()
 staticlibenv2['PCHSTOP'] = 'core/CorePCH.hpp'

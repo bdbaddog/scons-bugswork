@@ -5,17 +5,17 @@ platform = ARGUMENTS.get('platform', 'win32')   #holds current platform
 
 #check if the user has been naughty: only 'debug' or 'release' allowed
 if not (mode in ['debug', 'release']):
-   print "Error: expected 'debug' or 'release', found: " + mymode
+   print("Error: expected 'debug' or 'release', found: " + mymode)
    Exit(1)
    
 #check if the user has been naughty: only 'win32' or 'xbox' allowed
 if not (platform in ['win32', 'xbox']):
-   print "Error: expected 'win32' or 'release', found: " + platform
+   print("Error: expected 'win32' or 'release', found: " + platform)
    Exit(1)
    
 
 #tell the user what we're doing
-print '**** Compiling in ' + mode + ' mode...'
+print('**** Compiling in ' + mode + ' mode...')
 
 debugcflags = ['-Od', '-MDd', '-Ob0', '-Z7', '-W4', '-EHsc', '-GR', '-D_DEBUG', '-DUSE_PCH']   #extra compile flags for debug
 releasecflags = ['-O2', '-MD', '-Ob2', '-EHsc', '-GR', '-DNDEBUG', '-DUSE_PCH']         #extra compile flags for release
