@@ -1,0 +1,31 @@
+import glob
+
+#get all the build variables we need
+Import('env', 'buildroot', 'project', 'mode', 'debugcflags', 'releasecflags')
+staticlibenv = env.Clone()
+
+builddir = buildroot + '/' + project   #holds the build directory for this project
+targetpath = builddir  #holds the path to the executable in the build directory
+
+#append the user's additional compile flags
+#assume debugcflags and releasecflags are defined
+if mode == 'debug':
+   staticlibenv.Append(CPPFLAGS=debugcflags)
+else:
+   staticlibenv.Append(CPPFLAGS=releasecflags)
+
+   
+#get source file list
+srclst = map(lambda x: builddir + '/static/' + x, glob.glob('*.cpp'))
+
+#specify the build directory
+staticlibenv.BuildDir(builddir+"/static", ".", duplicate=0)
+
+staticlibenv2 = staticlibenv.Clone()
+staticlibenv2['PCHSTOP'] = 'core/CorePCH.hpp'
+# pch.cpp is beside this SConscript
+staticlibenv2['PCH'] = staticlibenv2.PCH(builddir + "/static/C.cpp")[0]
+additionalcflags = ['-Yl__xge_pch_symbol']
+staticlibenv2.Append(CPPFLAGS=additionalcflags)
+staticlib = staticlibenv2.StaticLibrary(targetpath+"/static/core", source=srclst)
+

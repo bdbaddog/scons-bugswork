@@ -1,0 +1,42 @@
+#get the mode flag from the command line
+#default to 'release' if the user didn't specify
+mode = ARGUMENTS.get('mode', 'debug')   #holds current mode
+platform = ARGUMENTS.get('platform', 'win32')   #holds current platform
+
+#check if the user has been naughty: only 'debug' or 'release' allowed
+if not (mode in ['debug', 'release']):
+   print "Error: expected 'debug' or 'release', found: " + mymode
+   Exit(1)
+   
+#check if the user has been naughty: only 'win32' or 'xbox' allowed
+if not (platform in ['win32', 'xbox']):
+   print "Error: expected 'win32' or 'release', found: " + platform
+   Exit(1)
+   
+
+#tell the user what we're doing
+print '**** Compiling in ' + mode + ' mode...'
+
+debugcflags = ['-Od', '-MDd', '-Ob0', '-Z7', '-W4', '-EHsc', '-GR', '-D_DEBUG', '-DUSE_PCH']   #extra compile flags for debug
+releasecflags = ['-O2', '-MD', '-Ob2', '-EHsc', '-GR', '-DNDEBUG', '-DUSE_PCH']         #extra compile flags for release
+
+env = Environment()
+
+env.Append(CPPPATH=['#include'])
+
+if mode == 'debug':
+    env.Append(LINKFLAGS='/DEBUG')
+
+buildroot = '#build/' + mode  #holds the root of the build directory tree
+
+#make sure the sconscripts can get to the variables
+Export('env', 'mode', 'platform', 'debugcflags', 'releasecflags')
+
+#put all .sconsign files in one place
+env.SConsignFile()
+
+#specify the sconscript for myprogram
+project = 'lib/core'
+SConscript(project + '/SConscript', exports=['buildroot', 'project'])
+
+
