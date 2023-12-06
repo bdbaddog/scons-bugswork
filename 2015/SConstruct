@@ -1,0 +1,2 @@
+Alias('do', 'install')
+Install('install', 'dir')
