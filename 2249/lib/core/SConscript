@@ -16,16 +16,21 @@ else:
 
    
 #get source file list
-srclst = map(lambda x: builddir + '/static/' + x, glob.glob('*.cpp'))
+# srclst = map(lambda x: builddir + '/static/' + x, glob.glob('*.cpp'))
+# srclst = [ builddir + '/static/' +x for x in glob.glob('*.cpp')]
+srclst = Glob('*.cpp')
 
 #specify the build directory
-staticlibenv.VariantDir(builddir+"/static", ".", duplicate=0)
+# staticlibenv.VariantDir(builddir+"/static", ".", duplicate=1)
 
 staticlibenv2 = staticlibenv.Clone()
-staticlibenv2['PCHSTOP'] = 'core/CorePCH.hpp'
+staticlibenv2['PCHSTOP'] = File('core/CorePCH.hpp')
 # pch.cpp is beside this SConscript
-staticlibenv2['PCH'] = staticlibenv2.PCH(builddir + "/static/C.cpp")[0]
+pch_nodes = staticlibenv2.PCH("C.cpp")
+print("PCHN: %s"%pch_nodes)
+staticlibenv2['PCH'] = pch_nodes[0]
+
 additionalcflags = ['-Yl__xge_pch_symbol']
 staticlibenv2.Append(CPPFLAGS=additionalcflags)
-staticlib = staticlibenv2.StaticLibrary(targetpath+"/static/core", source=srclst)
+staticlib = staticlibenv2.StaticLibrary("core", source=srclst)
 

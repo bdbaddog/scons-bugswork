@@ -37,6 +37,6 @@ env.SConsignFile()
 
 #specify the sconscript for myprogram
 project = 'lib/core'
-SConscript(project + '/SConscript', exports=['buildroot', 'project'])
+SConscript(project + '/SConscript', exports=['buildroot', 'project'], variant_dir=f"{buildroot}/{project}/static")
 
 
