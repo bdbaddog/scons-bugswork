@@ -1,0 +1,7 @@
+DefaultEnvironment(tools=[])
+env=Environment(tools=[])
+
+x=env.Command('blahx', ['one', 'two','three'],["echo SOURCES.abspath=${SOURCES.abspath}"])
+y=env.Command('blahy', ['one', 'two','three'],["echo CHANGED_SOURCES=${CHANGED_SOURCES.abspath}"])
+
+# breakpoint()
