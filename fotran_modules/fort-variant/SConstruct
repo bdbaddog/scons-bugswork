@@ -17,6 +17,9 @@ env = Environment(
     tools=tool_list,
     LINKFLAGS='',
     FORTRANMODDIR=Dir('#fortran_mods'),
+    # FORTRANMODDIR='#f_mods'
+    # FORTRANMODDIR='fort_mods'
+
 )
 
 # TODO: why does this go completely wrong if duplicate=True?
