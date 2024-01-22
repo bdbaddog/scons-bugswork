@@ -1,0 +1,23 @@
+"""
+Variation of test/Fortran/USE-MODULE-live.py
+which uses a variant dir.
+"""
+
+import sys
+
+duplicate =  ARGUMENTS.get('duplicate', False)
+
+
+if sys.platform == "win32":
+    tool_list = ['mingw', 'gfortran', 'gnulink']
+else:
+    tool_list = ['gfortran', 'gnulink']
+
+env = Environment(
+    tools=tool_list,
+    LINKFLAGS='',
+    FORTRANMODDIR=Dir('#fortran_mods'),
+)
+
+# TODO: why does this go completely wrong if duplicate=True?
+SConscript("src/SConscript", variant_dir="build", duplicate=duplicate, exports="env")

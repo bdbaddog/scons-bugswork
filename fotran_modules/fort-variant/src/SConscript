@@ -1,0 +1,6 @@
+Import("env")
+
+sources = env.Glob('*.f90') + env.Glob('utils/*.f90')
+#sources = Split("main.f90 module0.f90 module1.f90 module2.f90 utils/util_module.f90")
+env.Program('main', sources)
+
