@@ -1,0 +1,25 @@
+import os
+
+Import('env')
+
+# Function to find all source files recursively in a directory
+def find_sources(directory, extensions):
+    sources = []
+    print("debug point directory", directory)
+    for root, _, files in os.walk(directory):
+        print("debug point files", root, files)
+        for file in files:
+            print("debug point file", file)
+            if file.endswith(extensions):
+                print("Found file:", full_path)  # Debugging line
+                sources.append(os.path.join(root, file))
+    return sources
+
+# Find sources in the lib directory
+clib_sources = find_sources('tests/lib/clib', ('.h', '.c', '.s', '.S'))
+newlib_wrap_sources = find_sources('tests/lib/newlib_wrap', ('.h','.c', '.s', '.S'))
+print("debug point clib_sources", clib_sources)
+
+# Compile the library from the found source files
+clib_lib = env.Library('lib/clib', clib_sources)
+newlib_wrap_lib = env.Library('lib/newlib_wrap', newlib_wrap_sources)
