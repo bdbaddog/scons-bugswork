@@ -1,0 +1,29 @@
+env = Environment()
+def print_size(target, source, env):
+    # target[0]._memo = {}
+    print("PostAction:", target[0].getsize())
+
+def pre_print_size(target, source, env):
+    print("PreAction:", target[0].getsize())
+
+
+
+test = env.Object("test.c")
+print(f"Initial: {test[0].getsize()}")
+print("Pre AddPostAction:")
+
+for a in test[0].get_executor().get_action_list():
+    print(f"Action: {type(a)}")
+
+env.AddPostAction(test, Action(print_size))
+
+print("Post AddPostAction:")
+for a in test[0].get_executor().get_action_list():
+    print(f"Action: {type(a)}")
+
+# env.AddPreAction(test, pre_print_size)
+
+
+print("Post AddPreAction:")
+for a in test[0].get_executor().get_action_list():
+    print(f"Action: {type(a)}")

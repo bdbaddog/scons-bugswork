@@ -1,0 +1,20 @@
+env=Environment(tools=[])
+
+def build_value(target, source, env):
+    # A function that "builds" a Python Value by updating
+    # the Python value with the contents of the file
+    # specified as the source of the Builder call ($SOURCE).
+    print("getting called %s %s"%(target, source))
+    target[0].write(source[0].get_contents())
+
+output = env.Value('before')
+input = env.Value('after')
+
+# Attach a .UpdateValue() builder for the above function
+# action to the construction environment.
+env['BUILDERS']['UpdateValue'] = Builder(action=build_value)
+
+x=env.UpdateValue(target=output, source=input)
+print("output:%s"%output)
+
+AlwaysBuild(x)

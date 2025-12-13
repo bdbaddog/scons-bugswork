@@ -1,0 +1,6 @@
+print("before anything")
+env=Environment()
+print("After env")
+Program('main_d', ['main.cpp'])
+print("After def env PRogram")
+env.Program('main_e',Object('main_e.o','main.cpp'))

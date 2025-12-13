@@ -1,0 +1,34 @@
+env = Environment()
+
+def create(target, source, env):
+    """Action function to create a file from a Value.
+
+    Writes 'prefix=$SOURCE' into the file name given as $TARGET.
+    """
+    with open(str(target[0]), 'wb') as f:
+        f.write(b'prefix=' + source[0].get_contents() + b'\n')
+
+# Fetch the prefix= argument, if any, from the command line.
+# Use /usr/local as the default.
+prefix = ARGUMENTS.get('prefix', '/usr/local')
+
+# Attach builder named Config to the construction environment
+# using the 'create' action function above.
+env['BUILDERS']['Config'] = Builder(action=create)
+env.Config(target='package-config', source=Value(prefix))
+
+def build_value(target, source, env):
+    """Action function to "build" a Value.
+
+    Writes contents of $SOURCE into $TARGET, thus updating if it existed.
+    """
+    target[0].write(source[0].get_contents())
+
+output = env.Value('before')
+input = env.Value('after')
+
+# Attach a builder named UpdateValue to the construction environment
+# using the 'build_value' action function above.
+env['BUILDERS']['UpdateValue'] = Builder(action=build_value)
+Alias('blah',(env.UpdateValue(target=Value(output), source=Value(input))))
+

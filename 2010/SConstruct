@@ -1,0 +1,31 @@
+# ----------- SConstruct ---------------
+def printit(node, env, path):
+    # Show where we are getting called from
+    print("[%s] %s" % (env.name, node.path))
+    return []
+ 
+env1 = Environment()
+env1.Append(SCANNERS = Scanner(function=printit, skeys=['.x'], recursive=1))
+env1.name = 'env1'
+ 
+env2 = env1.Clone()
+env2.name = 'env2'
+ 
+# One file per environment
+# breakpoint()
+# file1 = env1.File('source1.x')
+# env1.Alias('x',file1)
+
+t1 = env1.Command('t1.y','source1.x','cp $SOURCE $TARGET')
+env1.Alias('x',t1)
+
+
+# file2 = env2.File('source2.x')
+# env2.Alias('x',file2)
+
+t2 = env1.Command('t2.y','source2.x','cp $SOURCE $TARGET')
+env2.Alias('x',t2)
+ 
+# Just to show that env1 and env2 are different...
+env2.Alias('y', file1) # malformed, but just for show
+env2.Alias('y', file2)

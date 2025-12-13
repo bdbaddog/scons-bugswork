@@ -1,0 +1,19 @@
+# SConstruct
+env = Environment()
+CacheDir('cache')
+
+filename = ARGUMENTS.get('sourcefile','SOURCE_A.txt')
+print(f"FILENAME: {filename}")
+
+def trivial(target, source, env):
+    with open(target[0].get_abspath(), 'w') as f:
+        f.write('trivial:filename\n')
+
+def writename(target, source, env):
+    with open(target[0].get_abspath(), 'w') as f:
+        f.write(source[0].srcnode().get_internal_path())
+
+A = File(filename)
+
+env.Command(target=A, action=Action(trivial), source=[])
+env.Command(target='NAME_A.txt', source=A, action=Action(writename))

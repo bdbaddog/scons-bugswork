@@ -1,0 +1,5 @@
+env=Environment(tools=[])
+
+# source = 'foo.in'
+source = File('foo.in')
+env.Command('${SOURCE.filebase}.out', source , "echo $TARGET $SOURCE")
