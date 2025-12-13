@@ -1,0 +1,30 @@
+import os
+import os.path
+import sys
+
+DefaultEnvironment(tools=[])
+
+for f in ['f1.in', 'f2.in', 'a.inc', 'b.inc']:
+    if not os.path.isfile(f):
+        with open(f,'w') as wf:
+            wf.write(f"File: {f}")
+
+def buildIt(env, target, source):
+    with open(target[0], 'w') as ofp:
+        for out in source:
+            with open(source[0], 'r') as ifp:
+                ofp.write(ifp.read())
+    return 0
+
+def source_scanner(node, env, path, builder):
+    return [File('a.inc'), File('b.inc')]
+
+env = Environment(tools=[])
+env.Command(
+    target="f.out",
+    source=["f1.in", "f2.in"],
+    action=buildIt,
+    source_scanner=Scanner(
+        lambda node, env, path: source_scanner(node, env, path, "w-env")
+    )
+)
