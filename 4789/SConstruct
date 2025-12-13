@@ -1,0 +1,6 @@
+import os
+
+env = Environment(ENV=dict(PATH=os.environ["PATH"]),
+                  tools=["pdflatex", "pdftex"])
+
+main = env.PDF("main.extra.tex")
