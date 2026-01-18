@@ -1,0 +1,13 @@
+DefaultEnvironment(tools=[])
+
+env = Environment()
+sources = ['hello.cpp']
+includes = ['hello.h']
+program = env.Program(target='hello.exe', source=sources)
+env.MSVSProject(
+    target='Hello' + env['MSVSPROJECTSUFFIX'],
+    srcs=sources,
+    incs=includes,
+    buildtarget=program,
+    variant='Release',
+)
